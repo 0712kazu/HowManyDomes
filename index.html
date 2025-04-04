@@ -1,31 +1,53 @@
-
 <!DOCTYPE html>
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>東京ドーム何個ぶん？</title>
+    <title>面積計算フォーム</title>
     <script>
-        function calculateTokyoDomes() {
-            var areaInput = document.getElementById("area").value;
-            var alertMessage = "数字を入力してください。";
-            if (isNaN(areaInput) || areaInput === "") {
-                alert(alertMessage);
+        function calculate() {
+            const tokyoDomeArea = 46755; // 東京ドームの面積（平方メートル）
+            const areaInput = document.getElementById('areaInput').value;
+            const unitSelect = document.getElementById('unitSelect').value;
+            const resultDiv = document.getElementById('result');
+
+            if (isNaN(areaInput) || areaInput <= 0) {
+                alert('数字を入力してください。');
                 return;
             }
-            var tokyoDomeArea = 46755; // 東京ドームの面積（平方メートル）
-            var numberOfTokyoDomes = areaInput / tokyoDomeArea;
-            document.getElementById("result").innerText = "東京ドーム " + numberOfTokyoDomes.toFixed(2) + " 個分（東京ドーム1個46755㎡）";
+
+            let areaInSquareMeters;
+            switch (unitSelect) {
+                case 'squareMeters':
+                    areaInSquareMeters = areaInput;
+                    break;
+                case 'squareKilometers':
+                    areaInSquareMeters = areaInput * 1000000;
+                    break;
+                case 'hectares':
+                    areaInSquareMeters = areaInput * 10000;
+                    break;
+                default:
+                    alert('単位を選択してください。');
+                    return;
+            }
+
+            const numTokyoDomes = (areaInSquareMeters / tokyoDomeArea).toFixed(2);
+            resultDiv.textContent = `東京ドーム ${numTokyoDomes} 個分（東京ドーム46755平方メートル）`;
         }
     </script>
 </head>
 <body>
-    <h1>東京ドーム何個ぶん？</h1>
-    <form onsubmit="event.preventDefault(); calculateTokyoDomes();">
-        <label for="area">面積（平方メートル）:</label>
-        <input type="text" id="area" name="area" required>
-        <input type="submit" value="計算">
-    </form>
-    <p id="result"></p>
+    <h1>東京ドーム何個分？</h1>
+    <label for="areaInput">面積:</label>
+    <input type="text" id="areaInput" oninput="this.value = this.value.replace(/[^0-9]/g, '');">
+    <label for="unitSelect">単位:</label>
+    <select id="unitSelect">
+        <option value="squareMeters">平方メートル</option>
+        <option value="squareKilometers">平方キロメートル</option>
+        <option value="hectares">ヘクタール</option>
+    </select>
+    <button onclick="calculate()">計算</button>
+    <div id="result"></div>
 </body>
 </html>
