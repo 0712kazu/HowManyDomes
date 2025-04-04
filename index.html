@@ -15,12 +15,12 @@
             }
             var tokyoDomeArea = 46755; // 東京ドームの面積（平方メートル）
             var numberOfTokyoDomes = areaInput / tokyoDomeArea;
-            document.getElementById("result").innerText = "東京ドーム " + numberOfTokyoDomes.toFixed(2) + " 個分";
+            document.getElementById("result").innerText = "東京ドーム " + numberOfTokyoDomes.toFixed(2) + " 個分（東京ドーム1個46755㎡）";
         }
     </script>
 </head>
 <body>
-    <h1>面積計算フォーム</h1>
+    <h1>京ドーム何個ぶん？</h1>
     <form onsubmit="event.preventDefault(); calculateTokyoDomes();">
         <label for="area">面積（平方メートル）:</label>
         <input type="text" id="area" name="area" required>
