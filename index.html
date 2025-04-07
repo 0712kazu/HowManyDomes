@@ -56,7 +56,7 @@
             top5Locations = top5Locations.slice(0, 5);
             
             locationDiv.innerHTML = `<p>最も近い面積の都道府県市区町村名: ${closestLocation['市区町村']} (${closestLocation['都道府県']})</p>`;
-            locationDiv.innerHTML += '<p>面積の近い上位5位までの都道府県市区町村名(令和７年１月情報／10000平方メートル以下省略):</p>';
+            locationDiv.innerHTML += '<p>面積の近い上位5位までの都道府県市区町村名(令和7年全国都道府県市区町村別面積調１月情報（国土地理院）／10000平方メートル以下省略):</p>';
             locationDiv.innerHTML += '<ul>';
             for (let i = 0; i < top5Locations.length; i++) {
                 locationDiv.innerHTML += `<li>${top5Locations[i].location['市区町村']} (${top5Locations[i].location['都道府県']}) - 面積: ${top5Locations[i].location['面積（平方メートル）']} 平方メートル</li>`;
